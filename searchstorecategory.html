@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .photocard {
+            /* border-color: brown;
+            border-style: solid; */
+            /* height: 300px; */
+            width: 200px;
+            background-color: aquamarine;
+
+            margin: 10px;
+            /* display: flex; */
+
+        }
+
+        .photocard .pcimg {
+            height: 200px;
+            width: auto;
+            background-color: rgb(232 222 200);
+            padding: 5px;
+        }
+
+        .pctext {
+
+            height: 100px;
+            width: 100%;
+            background-color: rgb(232 222 200);
+            text-align: center;
+            color: brown;
+
+        }
+
+        #maindiv {
+            display: flex;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="checkbox" name="cloth" value="" id="1" onclick="clothfilter('dress')">
+    <label for="1">Dress</label>
+
+    <input type="checkbox" name="cloth" value="" id="2" onclick="clothfilter('sarees')">
+    <label for="2">Sarees</label>
+
+    <input type="checkbox" value="" id="3" onclick="clothfilter('all')">
+    <label for="3">All</label>
+    <div id="maindiv"></div>
+
+    <script>
+        let data = [
+            {
+                Name: "dress1",
+                text: "₹1748",
+                link: "images/female1.jpg",
+                category: "dress"
+            },
+            {
+                Name: "saree1",
+                text: "₹2748",
+                link: "images/saree.webp",
+                category: "sarees"
+            },
+            {
+                Name: "dress2",
+                text: "₹4748",
+                link: "images/female2.webp",
+                category: "dress"
+            },
+            {
+                Name: "dress3",
+                text: "₹5748",
+                link: "images/female4.jpg",
+                category: "dress"
+            },
+            {
+                Name: "saree2",
+                text: "₹6748",
+                link: "images/saree2.webp",
+                category: "sarees"
+            }
+
+
+        ]
+
+
+
+        function clothfilter(category) {
+            let filterData = data.filter((val) => {
+                return val.category == category
+            })
+
+            let pp = document.getElementById('1').checked
+            console.log(pp)
+
+            console.log(filterData, "filter")
+
+
+            let checkboxdresss = document.getElementById('1');
+            let checkboxsaree = document.getElementById('2');
+            let checkboxall = document.getElementById('3');
+
+
+            if (category != 'all') {
+                checkboxall.checked=false
+
+                if (checkboxdresss.checked == true) {
+
+                    if (checkboxdresss.value == "") {
+                        checkboxdresss.value = mapdataall()
+                    }
+
+                }
+
+                if (checkboxsaree.checked == true) {
+                    if (checkboxsaree.value == "") {
+                        checkboxsaree.value = mapdataall()
+                    }
+                   
+                }
+
+
+                let checkboxes = document.getElementsByName('cloth')
+
+                let result = "";
+                for (var i = 0; i < checkboxes.length; i++) {
+                    if (checkboxes[i].checked) {
+                        // if (checkboxes[i] != 0) {
+                        if (result == "") {
+                            result = checkboxes[i].value
+                        }
+                        else {
+                            result = result + checkboxes[i].value
+                        }
+
+                        // }
+
+                    }
+                    document.getElementById('maindiv').innerHTML = result
+
+
+                }
+            }
+            else {
+
+                document.getElementById('maindiv').innerHTML = ""
+                checkboxdresss.checked=false
+                checkboxsaree.checked=false
+
+                let mapdata2 = data.map((val) => {
+                    return `<div class="photocard">
+                             <div class="pcimg">
+                                <img style="height: 100% ;width: 100%;" src=${val.link}>
+                            </div>
+                            <div class="pctext">
+                              ${val.Name}
+                              <br>
+                              <h1>${val.text}</h1>
+                            </div>
+                        </div>
+                        `
+                })
+
+                document.getElementById('maindiv').innerHTML = mapdata2.join("")
+            }
+
+
+
+            function mapdataall() {
+                let mapdata = filterData.map((val) => {
+                    return `<div class="photocard">
+                             <div class="pcimg">
+                                <img style="height: 100% ;width: 100%;" src=${val.link}>
+                            </div>
+                            <div class="pctext">
+                              ${val.Name}
+                              <br>
+                              <h1>${val.text}</h1>
+                            </div>
+                        </div>
+                        `
+                })
+
+                let map = mapdata.join("")
+                let maindiv = document.getElementById('maindiv')
+
+                return map
+
+            }
+
+
+
+
+        }
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        /* .create1 {} */
+    </style>
+</head>
+
+<body>
+    <input type="text" id="todo">
+    <button id="btn" onclick="fun()">create to do</button>
+
+
+    <script>
+
+        var counter = 0;
+        function fun() {
+            counter=counter + 1
+
+            
+            let div = document.createElement("div")
+            div.style.height = "100px"
+            div.style.width = "400px"
+            div.id = "newid" + (counter)
+            div.style.margin="1px"
+            div.style.display="flex"
+            // div.style.backgroundColor = "aqua"
+            let att=div.id
+
+
+
+            let button1 = document.createElement("button")
+
+            button1.innerHTML = "<i class='fa-solid fa-check'></i>"
+            button1.style.height = "100%"
+            button1.style.width = "20%"
+          
+            button1.setAttribute("onClick", "create(note"+ counter +","+att+")");
+            button1.className = "create1"
+
+
+
+            let button2 = document.createElement("button")
+
+            // button2.value = "Delete"
+            button2.innerHTML = "<i class='fa-solid fa-xmark'></i>"
+            button2.style.height = "100%"
+            button2.style.width = "20%"
+            
+            button2.setAttribute("onClick", "delete1("+ att +")");
+        
+
+            // let input = document.createElement("input")
+            // input.type = 'text'
+            // input.style.height = "100%"
+            // input.style.width = "60%"
+            // input.id="note" + (counter)
+            // input.value=document.getElementById('todo').value
+            // input.setAttribute("disabled", "");
+
+            let input = document.createElement("div")
+            input.style.height = "100%"
+            input.style.width = "60%"
+            input.style.border = "1px solid"
+            input.id="note" + (counter)
+            input.style.backgroundColor="#efefef"
+            input.style.textAlign="center"
+            input.style.display="flex"
+            input.style.justifyContent="center"
+            input.style.alignItems="center"
+            input.innerHTML=document.getElementById('todo').value
+
+
+
+            div.append(button1)
+            div.append(button2)
+            div.append(input)
+
+
+
+
+            document.body.appendChild(div)
+        }
+
+
+        function create(a,b) {
+            let id =a.id
+            let elem=document.getElementById(id);
+
+            console.log(elem.innerText)
+
+            let id2 =b.id
+            let div = document.getElementById(id2);
+            div.style.border="4px solid"
+            div.style.borderColor="green"
+            
+
+
+        }
+
+
+        function delete1(a) {
+            // document.getElementById()
+            let id=a.id//"newid1"
+            
+
+
+            var div = document.getElementById(id);
+            // if (div) {
+                div.parentNode.removeChild(div);
+            // }
+
+            // div.style.display="block"
+            // document.getElementById()
+        }
+    </script>
+</body>
+
+</html>
